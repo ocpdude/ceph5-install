@@ -31,37 +31,37 @@ During this install, I've configured _Ceph 5 on VMware 6.7U3_ using 4 VM's. This
 ### Let's get this party started!
 
 1. Access all of your nodes, patch.
-- [ ] dnf update -y
-- [ ] reboot
+    - dnf update -y
+    - reboot
 3. Install packages on **cephadm**
-- [ ] dnf install ceph podman -y
+    - dnf install ceph podman -y
 4. Install packages on **ceph[0,1,2]**
-- [ ] dnf install podman -y
+    - dnf install podman -y
 5. Sync root's ssh_key for passwordless login
-- [ ] On **cephadm** switch to root `sudo su -`
-- [ ] ssh-keygen
-- [ ] ssh-copy-id root@[all_nodes]
+    - On **cephadm** switch to root `sudo su -`
+    - ssh-keygen
+    - ssh-copy-id root@[all_nodes]
 6. Disable TCP timestamps
-- [ ] echo -n "net.ipv4.tcp_timestamps=0" > /etc/sysctl.d/99-ceph.conf
+    - echo -n "net.ipv4.tcp_timestamps=0" > /etc/sysctl.d/99-ceph.conf
 7. Add hosts to the /etc/hosts file, and replicate to each node
-- [ ] vi /etc/hosts
-- [ ] scp /etc/hosts ceph[0,1,2]@/etc/hosts
+    - vi /etc/hosts
+    - scp /etc/hosts ceph[0,1,2]@/etc/hosts
 8. ✨ Bootstrap! ✨
-- [ ] cephadm bootstrap --mon-ip 172.16.1.39 `cephadm's IP address`
+    - cephadm bootstrap --mon-ip 172.16.1.39 `cephadm's IP address`
 9. Add OSD nodes
-- [ ] ceph orch host add ceph0 172.16.1.40
-- [ ] ceph orch host add ceph1 172.16.1.41
-- [ ] ceph orch host add ceph1 172.16.1.42
+    - ceph orch host add ceph0 172.16.1.40
+    -  ceph orch host add ceph1 172.16.1.41
+    - ceph orch host add ceph1 172.16.1.42
 10. Label the nodes for Ceph services
-- [ ] ceph orch host label add cephadm _admin
-- [ ] ceph orch host label add ceph0, ceph1 mon
-- [ ] ceph orch host label add ceph1, ceph2 mgr
+    - ceph orch host label add cephadm _admin
+    - ceph orch host label add ceph0, ceph1 mon
+    - ceph orch host label add ceph1, ceph2 mgr
 #### Optional: Add services directly to the nodes `ceph orch apply mon --placement "ceph0,ceph1"`
 11. Apply the services
-- [ ] ceph orch apply mon label:mon
-- [ ] ceph orch apply mgr label:mgr
+    - ceph orch apply mon label:mon
+    - ceph orch apply mgr label:mgr
 12. Configure OSD's
-- [ ] ceph orch daemon add osd ceph[0,1,2]:/dev/sd[b,c]
+    - ceph orch daemon add osd ceph[0,1,2]:/dev/sd[b,c]
 #### Optional: Find and apply all available disks as OSD's, this will also 'auto discover' new disks when they're added.
 
 ### Commands of interest
