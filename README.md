@@ -43,26 +43,30 @@ During this install, I've configured _Ceph 5 on VMware 6.7U3_ using 4 VM's. This
     - ssh-copy-id root@[all_nodes]
 6. Disable TCP timestamps
     - echo -n "net.ipv4.tcp_timestamps=0" > /etc/sysctl.d/99-ceph.conf
+    - scp /etc/sysctl.d/99-ceph.conf ceph[0,1,2]:/etc/sysctl.d/99-ceph.conf
 7. Add hosts to the /etc/hosts file, and replicate to each node
     - vi /etc/hosts
-    - scp /etc/hosts ceph[0,1,2]@/etc/hosts
+    - scp /etc/hosts ceph[0,1,2]:/etc/hosts
 8. ✨ Bootstrap! ✨
     - cephadm bootstrap --mon-ip 172.16.1.39 `cephadm's IP address`
-9. Add OSD nodes
+9. Add the cephadm public key to all nodes.
+    - ceph cephadm get-pub-key > ~/ceph.pub
+    - ssh-copy-id -f -i ~/ceph.pub root@ceph[0,1,2]
+10. Add OSD nodes
     - ceph orch host add ceph0 172.16.1.40
-    -  ceph orch host add ceph1 172.16.1.41
-    - ceph orch host add ceph1 172.16.1.42
-10. Label the nodes for Ceph services
-    - ceph orch host label add cephadm _admin
-    - ceph orch host label add ceph0, ceph1 mon
-    - ceph orch host label add ceph1, ceph2 mgr
+    - ceph orch host add ceph1 172.16.1.41
+    - ceph orch host add ceph2 172.16.1.42
+11. Label the nodes for Ceph services
+    - ceph orch host label add cephadm [_admin,mon,mgr]
+    - ceph orch host label add ceph[0,1] mon
+    - ceph orch host label add ceph[1,2] mgr
 #### Optional: Add services directly to the nodes `ceph orch apply mon --placement "ceph0,ceph1"`
-11. Apply the services
+12. Apply the services
     - ceph orch apply mon label:mon
     - ceph orch apply mgr label:mgr
-12. Configure OSD's
+13. Configure OSD's
     - ceph orch daemon add osd ceph[0,1,2]:/dev/sd[b,c]
-#### Optional: Find and apply all available disks as OSD's, this will also 'auto discover' new disks when they're added.
+#### Optional: Find and apply all available disks as OSD's, this will also 'auto discover' new disks when they're added: `ceph orch apply osd --all-available-devices`
 
 ### Commands of interest
 1. Ceph Full Status : ceph status
