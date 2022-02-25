@@ -46,9 +46,11 @@ During this install, I've configured _Ceph 5 on VMware 6.7U3_ using 4 VM's. This
     - scp /etc/sysctl.d/99-ceph.conf ceph[0,1,2]:/etc/sysctl.d/99-ceph.conf
 7. Add hosts to the /etc/hosts file, and replicate to each node
     - vi /etc/hosts
+        -  add all hosts to this list
     - scp /etc/hosts ceph[0,1,2]:/etc/hosts
 8. ✨ Bootstrap! ✨
-    - cephadm bootstrap --mon-ip 172.16.1.39 `cephadm's IP address`
+    - cephadm bootstrap --mon-ip 172.16.1.39
+        -  the monitor ip is that of the cephadm box
 9. Add the cephadm public key to all nodes.
     - ceph cephadm get-pub-key > ~/ceph.pub
     - ssh-copy-id -f -i ~/ceph.pub root@ceph[0,1,2]
@@ -60,13 +62,13 @@ During this install, I've configured _Ceph 5 on VMware 6.7U3_ using 4 VM's. This
     - ceph orch host label add cephadm [_admin,mon,mgr]
     - ceph orch host label add ceph[0,1] mon
     - ceph orch host label add ceph[1,2] mgr
-#### Optional: Add services directly to the nodes `ceph orch apply mon --placement "ceph0,ceph1"`
+##### Optional: Add services directly to the nodes `ceph orch apply mon --placement "ceph0,ceph1"`
 12. Apply the services
     - ceph orch apply mon label:mon
     - ceph orch apply mgr label:mgr
 13. Configure OSD's
     - ceph orch daemon add osd ceph[0,1,2]:/dev/sd[b,c]
-#### Optional: Find and apply all available disks as OSD's, this will also 'auto discover' new disks when they're added: `ceph orch apply osd --all-available-devices`
+##### Optional: Find and apply all available disks as OSD's, this will also 'auto discover' new disks when they're added: `ceph orch apply osd --all-available-devices`
 
 ### Commands of interest
 1. Ceph Full Status : ceph status
