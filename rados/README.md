@@ -1,6 +1,6 @@
 ## Rados Object Storage Gateway
 
-Demo video on YouTube [here](https://youtu.be/lmFdpLipaBA) \
+Demo video on YouTube [here](https://youtu.be/lmFdpLipaBA)
 
 This script assumes you've got a clean Ceph 5 install. I touch on the fact that my lab has a private CA for generating certificates, I use one of these certificates for RGW/SSL connections on HAPROXY. You can easily create self signed certificates if for testing, generating these certs are out of scope for this write up. If you move forward without SSL, set your HAPROXY accordingly. 
 
