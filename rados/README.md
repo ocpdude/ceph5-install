@@ -17,7 +17,7 @@ For my testing, I use 's3cmd' which is supported as a package for many Linux dis
     - Verify the user 'dashboard' was created
     - Verify your rgw services started 'ceph orch ls'
     - Verify you now have access to the Object Gateway UI
-    <img src= "https://github.com/ocpdude/ceph5-install/blob/main/rados/dash-rgw.png" alt="Dashboard with Object Gateway" width="640" height="270">
+        <img src= "https://github.com/ocpdude/ceph5-install/blob/main/rados/dash-rgw.png" alt="Dashboard with Object Gateway" width="640" height="270">
 
 4. Now you have a choice, you can manually create a Pool if you want to use erasure coding data protection, or you can skip this step and Ceph will create it for you as a 'replica'. I chose to create an erasure coded pool with a format of 4x2. The naming convention is 'zone' ie 'default' for me, 'rgw', then 'buckets' and then 'data' : `default.rgw.buckets.data`.
 
@@ -92,5 +92,5 @@ Grafana runs on port :3000, for me it's only on my cephadm host (172.16.1.39)
     - Now, go back to your Ceph dashboard and check for the performance graphs to be loaded.\
     ***Let me know if this doesn't work for you.***
 
-    <img src= "https://github.com/ocpdude/ceph5-install/blob/main/rados/grafana.png" alt="Grafana in Ceph" width="640" height="405">
+        <img src= "https://github.com/ocpdude/ceph5-install/blob/main/rados/grafana.png" alt="Grafana in Ceph" width="640" height="405">
  
