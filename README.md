@@ -1,5 +1,6 @@
 # Ceph 5 Install
-### Demo video on YouTube [here](https://youtu.be/phvRNOtxNkM)
+Demo video on YouTube [here](https://youtu.be/phvRNOtxNkM) \
+Rados Gateway & Object Storage Setup [here](https://github.com/ocpdude/ceph5-install/tree/main/rados)
 
 During this install, I've configured _Ceph 5 on VMware 6.7U3_ using 4 VM's. This first node is **cephadm**, this node is used for configuring and managing your Ceph cluster. The next three VM's are specifically for the OSD's and will be labeled for services to support high availablity.
 
