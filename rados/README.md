@@ -17,6 +17,6 @@ For my testing, I use 's3cmd' which is supported as a package for many Linux dis
     - Verify the user 'dashboard' was created
     - Verify your rgw services started 'ceph orch ls'
     - Verify you now have access to the Object Gateway UI
-<img src= "https://github.com/ocpdude/ceph5-install/blob/main/rados/dash-rgw.png" alt="Dashboard with Object Gateway" width="640" height="270">
+    <img src= "https://github.com/ocpdude/ceph5-install/blob/main/rados/dash-rgw.png" alt="Dashboard with Object Gateway" width="640" height="270">
 
 4. 
