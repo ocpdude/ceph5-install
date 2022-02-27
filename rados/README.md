@@ -75,12 +75,18 @@ HUZZAH! You have a working S3/Object Storage Gateway on Ceph!
 ### Grafana Dashboard bonus!
 Grafana runs on port :3000, for me it's only on my cephadm host (172.16.1.39)
 
-1. Since I am using private and self-signed certs, we should first disable ssl validation checks
+1. Edit the ceph.conf to allow Grafana integration
+    - vi /etc/ceph/ceph.conf
+       ```
+       [security]
+       allow_embedding = true
+       ```
+2. Since I am using private and self-signed certs, we should first disable ssl validation checks
     - ceph dashboard set-grafana-api-ssl-verify False
     - ceph dashboard set-alertmanager-api-ssl-verify False
     - ceph dashboard set-prometheus-api-ssl-verify False
 
-2. Next, let's log into Grafana to and fix the browser error.
+3. Next, let's log into Grafana to and fix the browser error.
     - https://172.16.1.39:3000
         ##### mouse click anywhere on the page and type "thisisunsafe"
     - Now, go back to your Ceph dashboard and check for the performance graphs to be loaded.\
