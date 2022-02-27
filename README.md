@@ -25,7 +25,8 @@ During this install, I've configured _Ceph 5 on VMware 6.7U3_ using 4 VM's. This
     - 100 GB, /dev/sdc (unpartitioned)
 
 ```
-#### Note: Setting the filesystems are using ext2 to disable the overhead of disk journaling and is a recommend tune for all Ceph installs.
+#### Note: Setting the filesystems are using ext2 to disable the overhead
+of disk journaling and is a recommend tune for all Ceph installs.
 ```
 
 ### Let's get this party started!
